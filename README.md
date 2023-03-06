@@ -1,2 +1,2 @@
-# PROYECTO1_EstructurAS
+# PROYECTO1_Estructuras
 Interprete LISP utilizando la estructura Stack de Java.
