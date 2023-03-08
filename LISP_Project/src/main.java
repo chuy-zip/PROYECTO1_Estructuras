@@ -1,20 +1,27 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class main {
 	public static void main(String[] args) {
 		
 		System.out.println("INTERPRETE LISP");
 		
-		String[] Program = Tokenizer();
+		Tokenizer Tokenizer = new Tokenizer();
 		
-		for (int i = 0; i < Program.length; i++) {
-			System.out.println("|||" + Program[i]);
+		String[] Program = FileReader();
+		
+		ArrayList<Token> TokenList = Tokenizer.StringToTokens(Program);
+		
+		for (Token token : TokenList) {
+			System.out.println("Type: " + token.getTokenType() + " Value: " + token.getValue());
 		}
+		
+		
 		
 	}
 	
-	public static String[] Tokenizer() {
+	public static String[] FileReader() {
 		
 		String MyFile = "src/LISP.txt";
 		String CompleteLine = "";
@@ -30,9 +37,7 @@ public class main {
 			System.out.println("Error al leer el archivo");
 		}
 		
-		CompleteLine = CompleteLine.replaceAll("\\s","");
-		
-		String[] List = CompleteLine.split(""); 
+		String[] List = CompleteLine.split(" "); 
 	
 		return List;
 	}
