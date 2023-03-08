@@ -11,7 +11,7 @@ public Token<Float> Add(Token<Float> num1, Token<Float> num2){
 	
 	public Token<Float> Subtract(Token<Float> num1, Token<Float> num2){
 		
-		float result = num2.getValue() - num1.getValue();
+		float result = num1.getValue() - num2.getValue();
 		Token<Float> resultToken = new Token<>("ATOM", result);
 				
 		return resultToken;

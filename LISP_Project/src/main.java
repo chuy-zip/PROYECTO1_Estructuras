@@ -50,19 +50,19 @@ public class main {
 	        } else if (token.getTokenType().equals(Tokenizer.ADDING_OPERATOR)) {
 	            Token<Float> num2 = stack.pop();
 	            Token<Float> num1 = stack.pop();
-	            stack.push(Operator.Add(num1, num2)); // evaluate and push result onto stack
+	            stack.push(Operator.Add(num2, num1)); // evaluate and push result onto stack
 	        } else if (token.getTokenType().equals(Tokenizer.SUBTRACTING_OPERATOR)) {
 	            Token<Float> num2 = stack.pop();
 	            Token<Float> num1 = stack.pop();
-	            stack.push(Operator.Subtract(num1, num2)); // evaluate and push result onto stack
+	            stack.push(Operator.Subtract(num2, num1)); // evaluate and push result onto stack
 	        } else if (token.getTokenType().equals(Tokenizer.MULTIPLYING_OPERATOR)) {
 	            Token<Float> num2 = stack.pop();
 	            Token<Float> num1 = stack.pop();
-	            stack.push(Operator.Multiply(num1, num2)); // evaluate and push result onto stack
+	            stack.push(Operator.Multiply(num2, num1)); // evaluate and push result onto stack
 	        } else if (token.getTokenType().equals(Tokenizer.DIVIDING_OPERATOR)) {
 	            Token<Float> num2 = stack.pop();
 	            Token<Float> num1 = stack.pop();
-	            stack.push(Operator.Divide(num1, num2)); // evaluate and push result onto stack
+	            stack.push(Operator.Divide(num2, num1)); // evaluate and push result onto stack
 	        }
 	    }
 	    
