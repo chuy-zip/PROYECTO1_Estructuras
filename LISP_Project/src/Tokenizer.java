@@ -2,13 +2,13 @@ import java.util.ArrayList;
 
 public class Tokenizer {
 	
-	private final String OPEN_PAR = "OPEN_PAR";
-	private final String ATOM = "ATOM";
-	private final String CLOSE_PAR = "CLOSE_PAR";
-	private final String ADDING_OPERATOR = "ADDING_OPERATOR";
-	private final String SUBTRACTING_OPERATOR = "SUBTRACTING_OPERATOR";
-	private final String MULTIPLYING_OPERATOR = "MULTIPLYING_OPERATOR";
-	private final String DIVIDING_OPERATOR = "DIVIDING_OPERATOR";
+	final String OPEN_PAR = "OPEN_PAR";
+	final String ATOM = "ATOM";
+	final String CLOSE_PAR = "CLOSE_PAR";
+	final String ADDING_OPERATOR = "ADDING_OPERATOR";
+	final String SUBTRACTING_OPERATOR = "SUBTRACTING_OPERATOR";
+	final String MULTIPLYING_OPERATOR = "MULTIPLYING_OPERATOR";
+	final String DIVIDING_OPERATOR = "DIVIDING_OPERATOR";
 	
 	public ArrayList<Token> StringToTokens(String[] ProgramString) {
 		ArrayList<Token> TokenList = new ArrayList<>();
