@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Stack;
 
 public class main {
@@ -16,19 +17,30 @@ public class main {
 		Stack<Token> Stack = new Stack<Token>();
 		
 		for (Token token : TokenList) {
+			
 			if (token.getTokenType().equals(Tokenizer.OPEN_PAR)) {
 	            // push open parenthesis onto stack
 	            Stack.push(token);
 			}
 			
+			else if (token.getTokenType().equals(Tokenizer.QUOTE)) {
+	            // pop open parenthesis onto stack
+				Stack.pop();
+				Stack.push(Operator.QuoteConverter(TokenList, Tokenizer) );
+				break;
+	            
+			} 
+			
 			else if(token.getTokenType().equals(Tokenizer.CLOSE_PAR)) {
+				
 				ArrayList<Token> ListExpression = new ArrayList<>();
 				while(!Stack.peek().getTokenType().equals(Tokenizer.OPEN_PAR)) {
 					ListExpression.add(Stack.pop());
 				}
-				Stack.pop();
 				
-				 Stack.push(evaluateExpression(ListExpression, Operator, Tokenizer));
+				Stack.pop();// deleting close paraenthesis
+				
+				Stack.push(evaluateExpression(ListExpression, Operator, Tokenizer));
 			
 			} else {
 	            // push other tokens onto stack
@@ -43,9 +55,9 @@ public class main {
 	
 	public static Token<Float> evaluateExpression(ArrayList<Token> expression, LISPOperations Operator, Tokenizer Tokenizer ) {
 	    Stack<Token<Float>> stack = new Stack<>();
-	    
+	   
 	    for (Token token : expression) {
-	        if (token.getTokenType().equals(Tokenizer.ATOM)) {
+	        if (token.getTokenType().equals(Tokenizer.NUMBER)) {
 	            stack.push(token); // push number onto stack
 	        } else if (token.getTokenType().equals(Tokenizer.ADDING_OPERATOR)) {
 	            Token<Float> num2 = stack.pop();
@@ -63,7 +75,7 @@ public class main {
 	            Token<Float> num2 = stack.pop();
 	            Token<Float> num1 = stack.pop();
 	            stack.push(Operator.Divide(num2, num1)); // evaluate and push result onto stack
-	        }
+	        } 
 	    }
 	    
 	    return stack.pop(); // return the final result
@@ -84,6 +96,7 @@ public class main {
 		} catch (Exception e) {
 			System.out.println("Error al leer el archivo");
 		}
+		System.out.println(CompleteLine);
 		
 		String[] List = CompleteLine.split(" "); 
 	
