@@ -19,7 +19,6 @@ public class main {
 		
 		boolean IsQuoted = false;
 		
-		
 		for (Token token : TokenList) {
 			
 			if (token.getTokenType().equals(Tokenizer.OPEN_PAR) && IsQuoted == false) {
@@ -40,7 +39,6 @@ public class main {
 			else if(IsQuoted == true) {
 				
 				if( TokenList.indexOf(token) + 1 < TokenList.size()) {
-					System.out.println("Token quote");
 					token.setTokenType(Tokenizer.STRING);
 					Stack.peek().add(token);
 				}
@@ -53,6 +51,7 @@ public class main {
 						QuotedExpresion += token2.getValue() + " ";
 					}
 					Stack.pop();
+					QuotedExpresion = QuotedExpresion.trim();
 					Stack.peek().add(new Token<String>(Tokenizer.STRING, QuotedExpresion));
 				}
 			}
