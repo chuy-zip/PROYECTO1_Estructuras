@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Stack;
 
 public class main {
@@ -14,67 +13,84 @@ public class main {
 		
 		String[] Program = FileReader();
 		ArrayList<Token> TokenList = Tokenizer.StringToTokens(Program);
-		Stack<Token> Stack = new Stack<Token>();
+		Stack<ArrayList<Token>> Stack = new Stack<>();
+		ArrayList<Token> CurrentExpression = new ArrayList<>();
+        Stack.push(CurrentExpression);
+		
+		boolean IsQuoted = false;
+		
 		
 		for (Token token : TokenList) {
 			
-			if (token.getTokenType().equals(Tokenizer.OPEN_PAR)) {
-	            // push open parenthesis onto stack
-	            Stack.push(token);
+			if (token.getTokenType().equals(Tokenizer.OPEN_PAR) && IsQuoted == false) {
+				ArrayList<Token> ListExpression = new ArrayList<>();
+	            Stack.push(ListExpression);
 			}
 			
-			else if (token.getTokenType().equals(Tokenizer.QUOTE)) {
-	            // pop open parenthesis onto stack
-				Stack.pop();
-				Stack.push(Operator.QuoteConverter(TokenList, Tokenizer) );
-				break;
-	            
-			} 
-			
-			else if(token.getTokenType().equals(Tokenizer.CLOSE_PAR)) {
+			else if(token.getTokenType().equals(Tokenizer.CLOSE_PAR) && IsQuoted == false) {
+				ArrayList<Token> EvaluatedList = Stack.pop();
+				Stack.peek().add(evaluateExpression(EvaluatedList, Operator, Tokenizer));
 				
-				ArrayList<Token> ListExpression = new ArrayList<>();
-				while(!Stack.peek().getTokenType().equals(Tokenizer.OPEN_PAR)) {
-					ListExpression.add(Stack.pop());
+			} 
+			else if(token.getTokenType().equals(Tokenizer.QUOTE)) {
+				
+				IsQuoted = true;
+			}
+			
+			else if(IsQuoted == true) {
+				
+				if( TokenList.indexOf(token) + 1 < TokenList.size()) {
+					System.out.println("Token quote");
+					token.setTokenType(Tokenizer.STRING);
+					Stack.peek().add(token);
 				}
 				
-				Stack.pop();// deleting close paraenthesis
-				
-				Stack.push(evaluateExpression(ListExpression, Operator, Tokenizer));
-			
-			} else {
-	            // push other tokens onto stack
-	            Stack.push(token);
+				else {
+					
+					IsQuoted = false;
+					String QuotedExpresion = "";
+					for (Token token2 : Stack.peek()) {
+						QuotedExpresion += token2.getValue() + " ";
+					}
+					Stack.pop();
+					Stack.peek().add(new Token<String>(Tokenizer.STRING, QuotedExpresion));
+				}
+			}
+			else {
+	            // push any other operation tokens
+	            Stack.peek().add(token);
 	        }
 			
 		}
 		
-		System.out.println(Stack.pop().getValue());
+		System.out.println(Stack.pop().get(0).getValue());
 		
 	}
 	
 	public static Token<Float> evaluateExpression(ArrayList<Token> expression, LISPOperations Operator, Tokenizer Tokenizer ) {
 	    Stack<Token<Float>> stack = new Stack<>();
-	   
 	    for (Token token : expression) {
-	        if (token.getTokenType().equals(Tokenizer.NUMBER)) {
-	            stack.push(token); // push number onto stack
-	        } else if (token.getTokenType().equals(Tokenizer.ADDING_OPERATOR)) {
+	    	stack.push(token);
+	    }
+	    
+	    for (Token token : expression) {
+	    	
+	        if (token.getTokenType().equals(Tokenizer.ADDING_OPERATOR)) {
 	            Token<Float> num2 = stack.pop();
 	            Token<Float> num1 = stack.pop();
-	            stack.push(Operator.Add(num2, num1)); // evaluate and push result onto stack
+	            return Operator.Add(num1, num2); // evaluate and push result onto stack
 	        } else if (token.getTokenType().equals(Tokenizer.SUBTRACTING_OPERATOR)) {
 	            Token<Float> num2 = stack.pop();
 	            Token<Float> num1 = stack.pop();
-	            stack.push(Operator.Subtract(num2, num1)); // evaluate and push result onto stack
+	            return Operator.Subtract(num1, num2); // evaluate and push result onto stack
 	        } else if (token.getTokenType().equals(Tokenizer.MULTIPLYING_OPERATOR)) {
 	            Token<Float> num2 = stack.pop();
 	            Token<Float> num1 = stack.pop();
-	            stack.push(Operator.Multiply(num2, num1)); // evaluate and push result onto stack
+	            return Operator.Multiply(num1, num2); // evaluate and push result onto stack
 	        } else if (token.getTokenType().equals(Tokenizer.DIVIDING_OPERATOR)) {
 	            Token<Float> num2 = stack.pop();
 	            Token<Float> num1 = stack.pop();
-	            stack.push(Operator.Divide(num2, num1)); // evaluate and push result onto stack
+	            return Operator.Divide(num1, num2); // evaluate and push result onto stack
 	        } 
 	    }
 	    
