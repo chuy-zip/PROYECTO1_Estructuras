@@ -11,10 +11,13 @@ public class Tokenizer {
 	final String DIVIDING_OPERATOR = "DIVIDING_OPERATOR";
 	final String QUOTE = "QUOTE";
 	final String STRING = "STRING";
+	final String ATOM = "ATOM";
 	final String ATOM_T = "ATOM_T";
 	final String ATOM_NIL = "ATOM_NIL";
 	final String EMPTY_LIST = "EMPTY LIST";
 	final String LIST = "LIST";
+	
+	//Variables that are considered atoms are also number and string
 	
 	public ArrayList<Token> StringToTokens(String[] ProgramString) {
 		ArrayList<Token> TokenList = new ArrayList<>();
@@ -63,8 +66,24 @@ public class Tokenizer {
 				Token<String> newToken = new Token<String>(QUOTE, "'");
 				TokenList.add(newToken);
 			}
-			else if(token.equals( "atom" ) ) {
-				
+			else if(token.equalsIgnoreCase( "atom" )) {
+				Token<String> newToken = new Token<String>(ATOM, "atom");
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equalsIgnoreCase( "T" )) {
+				Token<Boolean> newToken = new Token<Boolean>(ATOM_T, true);
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equalsIgnoreCase( "NIL" )) {
+				Token<Boolean> newToken = new Token<Boolean>(ATOM_NIL, false);
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equalsIgnoreCase( "()" )) {
+				Token<String[]> newToken = new Token<String[]>(EMPTY_LIST, new String[0]);
+				TokenList.add(newToken);
 			}
 			
 			else {

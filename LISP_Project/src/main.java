@@ -66,8 +66,8 @@ public class main {
 		
 	}
 	
-	public static Token<Float> evaluateExpression(ArrayList<Token> expression, LISPOperations Operator, Tokenizer Tokenizer ) {
-	    Stack<Token<Float>> stack = new Stack<>();
+	public static Token evaluateExpression(ArrayList<Token> expression, LISPOperations Operator, Tokenizer Tokenizer ) {
+	    Stack<Token> stack = new Stack<>();
 	    for (Token token : expression) {
 	    	stack.push(token);
 	    }
@@ -90,7 +90,19 @@ public class main {
 	            Token<Float> num2 = stack.pop();
 	            Token<Float> num1 = stack.pop();
 	            return Operator.Divide(num1, num2); // evaluate and push result onto stack
-	        } 
+	        } else if(token.getTokenType().equals(Tokenizer.ATOM)) {
+	        	Token<Boolean> Item = stack.pop();
+	        	String ItemType = Item.getTokenType();
+	        	if(ItemType.equals(Tokenizer.ATOM_NIL) || ItemType.equals(Tokenizer.ATOM_T) || ItemType.equals(Tokenizer.NUMBER) || ItemType.equals(Tokenizer.STRING) || ItemType.equals(Tokenizer.EMPTY_LIST) )  {
+	        		 Token<Boolean> IsAtom = new Token<Boolean>(Tokenizer.ATOM_T, true);
+	        		 return IsAtom;
+	        	}
+	        	else {
+	        		Token<Boolean> NotAtom = new Token<Boolean>(Tokenizer.ATOM_NIL, false);
+	        		return NotAtom;
+	        		
+	        	}
+	        }
 	    }
 	    
 	    return stack.pop(); // return the final result
