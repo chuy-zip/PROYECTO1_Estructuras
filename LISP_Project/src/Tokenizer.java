@@ -11,6 +11,10 @@ public class Tokenizer {
 	final String DIVIDING_OPERATOR = "DIVIDING_OPERATOR";
 	final String QUOTE = "QUOTE";
 	final String STRING = "STRING";
+	final String ATOM_T = "ATOM_T";
+	final String ATOM_NIL = "ATOM_NIL";
+	final String EMPTY_LIST = "EMPTY LIST";
+	final String LIST = "LIST";
 	
 	public ArrayList<Token> StringToTokens(String[] ProgramString) {
 		ArrayList<Token> TokenList = new ArrayList<>();
@@ -58,6 +62,9 @@ public class Tokenizer {
 
 				Token<String> newToken = new Token<String>(QUOTE, "'");
 				TokenList.add(newToken);
+			}
+			else if(token.equals( "atom" ) ) {
+				
 			}
 			
 			else {
