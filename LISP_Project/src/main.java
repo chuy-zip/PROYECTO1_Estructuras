@@ -119,11 +119,8 @@ public class main {
 	        	
 	        } else if(token.getTokenType().equals(Tokenizer.GREATER)) {
 	        	Token<T> item2 = stack.pop();
-	        	String Item2Val= "" + item2.getValue();
-	        	
-	        	stack.pop();//Popping out the operator from the stack
-	        	
 	        	Token<T> item1 = stack.pop();
+	        	String Item2Val= "" + item2.getValue();
 	        	String Item1Val= "" + item1.getValue();
 	        		
 	        	if(Item1Val.compareTo(Item2Val) > 0) { // Using compareTo, so it can compare both numbers and strings
@@ -137,11 +134,8 @@ public class main {
 	        	
 	        } else if(token.getTokenType().equals(Tokenizer.LOWER)) {
 	        	Token<T> item2 = stack.pop();
-	        	String Item2Val= "" + item2.getValue();
-	        	
-	        	stack.pop();//Popping out the operator from the stack
-	        	
 	        	Token<T> item1 = stack.pop();
+	        	String Item2Val= "" + item2.getValue();
 	        	String Item1Val= "" + item1.getValue();
 	        		
 	        	if(Item1Val.compareTo(Item2Val) < 0) { // Using compareTo, so it can compare both numbers and strings
@@ -157,11 +151,8 @@ public class main {
 	        
 	        else if(token.getTokenType().equals(Tokenizer.NUM_EQ)) {
 	        	Token<T> item2 = stack.pop();
-	        	String Item2Val= "" + item2.getValue();
-	        	
-	        	stack.pop();//Popping out the operator from the stack
-	        	
 	        	Token<T> item1 = stack.pop();
+	        	String Item2Val= "" + item2.getValue();
 	        	String Item1Val= "" + item1.getValue();
 	        		
 	        	if(Item1Val.compareTo(Item2Val) == 0) { // Using compareTo, so it can compare both numbers and strings
@@ -177,11 +168,8 @@ public class main {
 	        
 	        else if(token.getTokenType().equals(Tokenizer.GREAT_EQ)) {
 	        	Token<T> item2 = stack.pop();
-	        	String Item2Val= "" + item2.getValue();
-	        	
-	        	stack.pop();//Popping out the operator from the stack
-	        	
 	        	Token<T> item1 = stack.pop();
+	        	String Item2Val= "" + item2.getValue();
 	        	String Item1Val= "" + item1.getValue();
 	        		
 	        	if(Item1Val.compareTo(Item2Val) > 0 || Item1Val.compareTo(Item2Val) == 0) { // Using compareTo, so it can compare both numbers and strings
@@ -195,11 +183,8 @@ public class main {
 	        	
 	        } else if(token.getTokenType().equals(Tokenizer.LOWER_EQ)) {
 	        	Token<T> item2 = stack.pop();
-	        	String Item2Val= "" + item2.getValue();
-	        	
-	        	stack.pop();//Popping out the operator from the stack
-	        	
 	        	Token<T> item1 = stack.pop();
+	        	String Item2Val= "" + item2.getValue();
 	        	String Item1Val= "" + item1.getValue();
 	        		
 	        	if(Item1Val.compareTo(Item2Val) < 0 || Item1Val.compareTo(Item2Val) == 0) { // Using compareTo, so it can compare both numbers and strings
