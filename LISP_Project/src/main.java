@@ -102,20 +102,56 @@ public class main {
 	        		return NotAtom;
 	        		
 	        	}	
-	        }	else if(token.getTokenType().equals(Tokenizer.EQUALS)) {
-	        		Token<T> item1 = stack.pop();
-	        		T Item1Val= item1.getValue();
-	        		Token<T> item2 = stack.pop();
-	        		T Item2Val= item2.getValue();
+	        } else if(token.getTokenType().equals(Tokenizer.EQUALS)) {
+	        	Token<T> item1 = stack.pop();
+	        	T Item1Val= item1.getValue();
+	        	Token<T> item2 = stack.pop();
+	        	T Item2Val= item2.getValue();
 	        		
-	        		if(Item1Val.equals(Item2Val)) {
-	        			Token<Boolean> IsSame = new Token<Boolean>(Tokenizer.ATOM_T, true);
-		        		return IsSame;
-	        		}
-	        		else {
-		        		Token<Boolean> NotSame = new Token<Boolean>(Tokenizer.ATOM_NIL, false);
-		        		return NotSame;
-		        	}	
+	        	if(Item1Val.equals(Item2Val)) {
+	        		Token<Boolean> IsSame = new Token<Boolean>(Tokenizer.ATOM_T, true);
+		        	return IsSame;
+	        	}
+	        	else {
+		        	Token<Boolean> NotSame = new Token<Boolean>(Tokenizer.ATOM_NIL, false);
+		        	return NotSame;
+		        }	
+	        	
+	        } else if(token.getTokenType().equals(Tokenizer.GREATER)) {
+	        	Token<T> item2 = stack.pop();
+	        	String Item2Val= "" + item2.getValue();
+	        	
+	        	stack.pop();//Popping out the operator from the stack
+	        	
+	        	Token<T> item1 = stack.pop();
+	        	String Item1Val= "" + item1.getValue();
+	        		
+	        	if(Item1Val.compareTo(Item2Val) > 0) { // Using compareTo, so it can compare both numbers and strings
+	        		Token<Boolean> IsGreater = new Token<Boolean>(Tokenizer.ATOM_T, true);
+		        	return IsGreater;
+	        	}
+	        	else {
+		        	Token<Boolean> NotGreater = new Token<Boolean>(Tokenizer.ATOM_NIL, false);
+		        	return NotGreater;
+		        }
+	        	
+	        } else if(token.getTokenType().equals(Tokenizer.LOWER)) {
+	        	Token<T> item2 = stack.pop();
+	        	String Item2Val= "" + item2.getValue();
+	        	
+	        	stack.pop();//Popping out the operator from the stack
+	        	
+	        	Token<T> item1 = stack.pop();
+	        	String Item1Val= "" + item1.getValue();
+	        		
+	        	if(Item1Val.compareTo(Item2Val) < 0) { // Using compareTo, so it can compare both numbers and strings
+	        		Token<Boolean> IsGreater = new Token<Boolean>(Tokenizer.ATOM_T, true);
+		        	return IsGreater;
+	        	}
+	        	else {
+		        	Token<Boolean> NotGreater = new Token<Boolean>(Tokenizer.ATOM_NIL, false);
+		        	return NotGreater;
+		        }
 	        	
 	        }
 	    }

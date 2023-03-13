@@ -1,1 +1,1 @@
-( eqUAls FOO FOO )
+( -10 < -2 )

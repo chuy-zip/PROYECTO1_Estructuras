@@ -17,6 +17,11 @@ public class Tokenizer {
 	final String EMPTY_LIST = "EMPTY LIST";
 	final String LIST = "LIST";
 	final String EQUALS = "EQUALS";
+	final String NUM_EQ = "NUM_EQ";
+	final String GREATER = "GREATER";
+	final String LOWER = "LOWER";
+	final String GREAT_EQ = "GREAT_EQ";
+	final String LOWER_EQ = "LOWER_EQ";
 	
 	//Variables that are considered atoms are also number and string
 	
@@ -91,6 +96,32 @@ public class Tokenizer {
 				Token<String> newToken = new Token<String>(EQUALS, "EQUALS");
 				TokenList.add(newToken);
 			}
+			
+			else if(token.equalsIgnoreCase( "=" ) ) {
+				Token<String> newToken = new Token<String>(NUM_EQ, "NUM_EQ");
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equalsIgnoreCase( ">" ) ) {
+				Token<String> newToken = new Token<String>(GREATER, "GREATER");
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equalsIgnoreCase( "<" ) ) {
+				Token<String> newToken = new Token<String>(LOWER, "LOWER");
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equalsIgnoreCase( ">=" ) ) {
+				Token<String> newToken = new Token<String>(GREAT_EQ, "GREATER_EQ");
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equalsIgnoreCase( "<=" ) ) {
+				Token<String> newToken = new Token<String>(LOWER_EQ, "LOWER_EQ");
+				TokenList.add(newToken);
+			}
+			
 			
 			else {
 				Token<String> newToken = new Token<>(STRING, token);
