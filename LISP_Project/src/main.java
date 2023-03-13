@@ -66,7 +66,7 @@ public class main {
 		
 	}
 	
-	public static Token evaluateExpression(ArrayList<Token> expression, LISPOperations Operator, Tokenizer Tokenizer ) {
+	public static <T> Token evaluateExpression(ArrayList<Token> expression, LISPOperations Operator, Tokenizer Tokenizer ) {
 	    Stack<Token> stack = new Stack<>();
 	    for (Token token : expression) {
 	    	stack.push(token);
@@ -101,7 +101,22 @@ public class main {
 	        		Token<Boolean> NotAtom = new Token<Boolean>(Tokenizer.ATOM_NIL, false);
 	        		return NotAtom;
 	        		
-	        	}
+	        	}	
+	        }	else if(token.getTokenType().equals(Tokenizer.EQUALS)) {
+	        		Token<T> item1 = stack.pop();
+	        		T Item1Val= item1.getValue();
+	        		Token<T> item2 = stack.pop();
+	        		T Item2Val= item2.getValue();
+	        		
+	        		if(Item1Val.equals(Item2Val)) {
+	        			Token<Boolean> IsSame = new Token<Boolean>(Tokenizer.ATOM_T, true);
+		        		return IsSame;
+	        		}
+	        		else {
+		        		Token<Boolean> NotSame = new Token<Boolean>(Tokenizer.ATOM_NIL, false);
+		        		return NotSame;
+		        	}	
+	        	
 	        }
 	    }
 	    

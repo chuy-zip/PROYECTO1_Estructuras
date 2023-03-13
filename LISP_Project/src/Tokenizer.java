@@ -16,6 +16,7 @@ public class Tokenizer {
 	final String ATOM_NIL = "ATOM_NIL";
 	final String EMPTY_LIST = "EMPTY LIST";
 	final String LIST = "LIST";
+	final String EQUALS = "EQUALS";
 	
 	//Variables that are considered atoms are also number and string
 	
@@ -83,6 +84,11 @@ public class Tokenizer {
 			
 			else if(token.equalsIgnoreCase( "()" )) {
 				Token<String[]> newToken = new Token<String[]>(EMPTY_LIST, new String[0]);
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equalsIgnoreCase( "equals" ) || token.equalsIgnoreCase( "eq" ) ) {
+				Token<String> newToken = new Token<String>(EQUALS, "EQUALS");
 				TokenList.add(newToken);
 			}
 			
