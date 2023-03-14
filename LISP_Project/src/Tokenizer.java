@@ -99,27 +99,27 @@ public class Tokenizer {
 			}
 			
 			else if(token.equalsIgnoreCase( "=" ) ) {
-				Token<String> newToken = new Token<String>(NUM_EQ, "NUM_EQ");
+				Token<String> newToken = new Token<String>(NUM_EQ, "=");
 				TokenList.add(newToken);
 			}
 			
 			else if(token.equalsIgnoreCase( ">" ) ) {
-				Token<String> newToken = new Token<String>(GREATER, "GREATER");
+				Token<String> newToken = new Token<String>(GREATER, ">");
 				TokenList.add(newToken);
 			}
 			
 			else if(token.equalsIgnoreCase( "<" ) ) {
-				Token<String> newToken = new Token<String>(LOWER, "LOWER");
+				Token<String> newToken = new Token<String>(LOWER, "<");
 				TokenList.add(newToken);
 			}
 			
 			else if(token.equalsIgnoreCase( ">=" ) ) {
-				Token<String> newToken = new Token<String>(GREAT_EQ, "GREATER_EQ");
+				Token<String> newToken = new Token<String>(GREAT_EQ, ">=");
 				TokenList.add(newToken);
 			}
 			
 			else if(token.equalsIgnoreCase( "<=" ) ) {
-				Token<String> newToken = new Token<String>(LOWER_EQ, "LOWER_EQ");
+				Token<String> newToken = new Token<String>(LOWER_EQ, "<=");
 				TokenList.add(newToken);
 			}
 			
@@ -131,18 +131,9 @@ public class Tokenizer {
 			
 			else if(token.equalsIgnoreCase( "cond" ) ) {
 				Token<String> newToken = new Token<>(COND, "COND");
-				System.out.println("Encontro COND");
 				TokenList.add(newToken);
-			}
-			
-			
-			else {
-				Token<String> newToken = new Token<>(STRING, token);
-				TokenList.add(newToken);
-			}
-			
+			}	
 		}
-		
 		return TokenList;
 		
 	}

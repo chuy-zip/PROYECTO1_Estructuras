@@ -18,7 +18,6 @@ public class main {
         Stack.push(CurrentExpression);
 		
 		boolean IsQuoted = false;
-		boolean Cond = false;
 		
 		for (Token token : TokenList) {
 			
@@ -257,12 +256,19 @@ public static <T> Token evaluateExpression(ArrayList<Token> expression, LISPOper
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(MyFile));
 			while((Currentline = reader.readLine())!=null) {
+				int semicolonIndex = CompleteLine.indexOf(';');
+			    if (semicolonIndex >= 0) {
+			        CompleteLine = CompleteLine.substring(0, semicolonIndex);
+			    }
+				
 				CompleteLine += Currentline; 
 			}
 			
 		} catch (Exception e) {
 			System.out.println("Error al leer el archivo");
 		}
+		
+		CompleteLine = CompleteLine.replace("\t", " ");
 		System.out.println(CompleteLine);
 		
 		String[] List = CompleteLine.split(" "); 

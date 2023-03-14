@@ -1,1 +1,4 @@
-( cond ( < 0.2 0 ) ( + 5 3 ) ( + 1 2 ) )
+( cond ( = ( - 5 5 ) 0 )
+	( + 5 3 ) 				; The case if it is true
+	( + 1 2 ) 				; The case if it is false
+)
