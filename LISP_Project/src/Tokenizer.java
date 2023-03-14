@@ -22,6 +22,7 @@ public class Tokenizer {
 	final String LOWER = "LOWER";
 	final String GREAT_EQ = "GREAT_EQ";
 	final String LOWER_EQ = "LOWER_EQ";
+	final String COND = "COND";
 	
 	//Variables that are considered atoms are also number and string
 	
@@ -119,6 +120,18 @@ public class Tokenizer {
 			
 			else if(token.equalsIgnoreCase( "<=" ) ) {
 				Token<String> newToken = new Token<String>(LOWER_EQ, "LOWER_EQ");
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equalsIgnoreCase( "list" ) ) {
+				Token<ArrayList<String>> newToken = new Token<>(LIST, new ArrayList<String>());
+				System.out.println();
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equalsIgnoreCase( "cond" ) ) {
+				Token<String> newToken = new Token<>(COND, "COND");
+				System.out.println("Encontro COND");
 				TokenList.add(newToken);
 			}
 			

@@ -18,10 +18,11 @@ public class main {
         Stack.push(CurrentExpression);
 		
 		boolean IsQuoted = false;
+		boolean Cond = false;
 		
 		for (Token token : TokenList) {
 			
-			if (token.getTokenType().equals(Tokenizer.OPEN_PAR) && IsQuoted == false) {
+			if (token.getTokenType().equals(Tokenizer.OPEN_PAR) && IsQuoted == false ) {
 				ArrayList<Token> ListExpression = new ArrayList<>();
 	            Stack.push(ListExpression);
 			}
@@ -55,6 +56,8 @@ public class main {
 					Stack.peek().add(new Token<String>(Tokenizer.STRING, QuotedExpresion));
 				}
 			}
+			
+			
 			else {
 	            // push any other operation tokens
 	            Stack.peek().add(token);
@@ -196,6 +199,31 @@ public class main {
 		        	return NotGreater;
 		        }
 	        	
+	        } else if(token.getTokenType().equals(Tokenizer.LIST)) {
+	        	
+	        	for (Token tokenForList : expression) {
+	        		if(!tokenForList.getTokenType().equals(Tokenizer.LIST)) {
+	        			((ArrayList<String>) token.getValue()).add( "" + tokenForList.getValue());
+		    	    	
+	        		}
+	    	    	
+	    	    }
+	        	// returning the LIST, that is the first position
+	        	return expression.get(0);
+	        	
+	        }
+	        else if(token.getTokenType().equals(Tokenizer.COND)) {
+	        	Token<T> OperationResult = stack.pop();
+	        	Token<T> Validator = stack.pop();
+	        	
+	        	if(Validator.getTokenType().equals(Tokenizer.ATOM_T)) {
+	        		return OperationResult;
+	        		
+	        	}
+	        	else {
+		        	Token<Boolean> NotTrue = new Token<Boolean>(Tokenizer.ATOM_NIL, false);
+		        	return NotTrue;
+		        }
 	        }
 	    }
 	    
