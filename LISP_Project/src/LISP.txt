@@ -1,4 +1,4 @@
-( cond ( = ( - 5 5 ) 0 )
+( cond ( = 1 0 )	; Condition 5 - 5 = 0
 	( + 5 3 ) 				; The case if it is true
-	( + 1 2 ) 				; The case if it is false
+	( - 0 2 ) 				; The case if it is false
 )
