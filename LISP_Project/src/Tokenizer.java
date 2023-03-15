@@ -23,6 +23,7 @@ public class Tokenizer {
 	final String GREAT_EQ = "GREAT_EQ";
 	final String LOWER_EQ = "LOWER_EQ";
 	final String COND = "COND";
+	final String DEFUN = "DEFUN";
 	
 	//Variables that are considered atoms are also number and string
 	
@@ -133,6 +134,20 @@ public class Tokenizer {
 				Token<String> newToken = new Token<>(COND, "COND");
 				TokenList.add(newToken);
 			}	
+			
+			else if(token.equalsIgnoreCase( "defun" )) {
+				Token<String> newToken = new Token<>(DEFUN, "DEFUN");
+				TokenList.add(newToken);
+			}
+			
+			else if(token.equals(" ") || token.equals("")){
+				continue;
+			}
+			
+			else{
+				Token<String> newToken = new Token<>(STRING, token);
+				TokenList.add(newToken);
+			}
 		}
 		return TokenList;
 		
