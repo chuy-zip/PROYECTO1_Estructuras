@@ -1,5 +1,7 @@
-( defun addNum ( )
-   ( + ( + 1 1 ) 3 ) 
+;Favor siempre dejar minimo un espacio entre cada Token 
+
+( defun addNum ( x y )
+   ( + x y ) 
 ) 
 
-( + ( addNum ) 5 )
+ ( + ( addNum ( 2 6 ) ) 5 )

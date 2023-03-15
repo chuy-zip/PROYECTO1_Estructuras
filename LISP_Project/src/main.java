@@ -27,9 +27,7 @@ public class main {
 		
 		boolean IsQuoted = false;
 		boolean InDefun = false;
-		
-
-		Iterator<Token> LispIterator = TokenList.iterator();
+		boolean InParameters = false;
 		
 		for (Token token : TokenList) {
 			
@@ -37,6 +35,32 @@ public class main {
 				InDefun = true; // Setting flag so the interpreter knows every character must be in the defun
 				MethodCreator.setOpenParQty(1);//Adding 1 to the count of open parenthesis
 				
+			}
+			
+			else if( CreatedMethods.get(token.getValue()) != null) {
+				InParameters = true;
+				CreatedMethodName = (String) token.getValue();
+				Stack.peek().add(token); // adding the method call to the list
+			}
+			
+			else if(InParameters) {
+				
+				if(token.getTokenType().equals(Tokenizer.OPEN_PAR)) {
+					continue;
+				}
+				
+				else if(token.getTokenType().equals(Tokenizer.CLOSE_PAR)) {
+					CreatedMethods.get(CreatedMethodName).ReplaceParameters();
+					CreatedMethodName = "";
+					InParameters = false;
+					
+				}
+				
+				else {
+					
+					CreatedMethods.get(CreatedMethodName).getGivenParameters().add(token);
+					
+				}
 			}
 			
 			else if( InDefun ) {
@@ -56,8 +80,7 @@ public class main {
 					
 					Method newMethod = new Method(CreatedMethodName);
 					
-					CreatedMethods.put("" + token.getValue(), newMethod);
-					
+					CreatedMethods.put("" + token.getValue(), newMethod);	
 				}
 				
 				else if(MethodCreator.getOpenParQty()  == 2 && MethodCreator.getCloseParQTty() == 0) { //This means the reader is in the parameters of the function
