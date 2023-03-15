@@ -6,11 +6,11 @@ public class Method {
 	private ArrayList<Token> Parameters;
 	private ArrayList<Token> Code;
 	
-	public Method(String name, ArrayList<Token> param, ArrayList<Token> TokenList){
+	public Method(String name){
 		
 		 MethodName = name;
-		 Parameters = param;
-		 Code = TokenList;
+		 Parameters = new ArrayList<Token>();
+		 Code = new ArrayList<Token>();
 		
 	}
 

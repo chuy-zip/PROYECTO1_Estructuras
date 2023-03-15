@@ -19,19 +19,23 @@ public class main {
 		ArrayList<Token> CurrentExpression = new ArrayList<>();
 		LISPEvaluator Evaluator = new LISPEvaluator();
 		
-		HashMap<String, Object> CreatedMethods = new HashMap<String, Object>();
+		HashMap<String, Method> CreatedMethods = new HashMap<String, Method>();
 		MethodParser MethodCreator = new MethodParser();
+		String CreatedMethodName = ""; 
 		
         Stack.push(CurrentExpression);
 		
 		boolean IsQuoted = false;
 		boolean InDefun = false;
 		
+
+		Iterator<Token> LispIterator = TokenList.iterator();
+		
 		for (Token token : TokenList) {
 			
 			if( token.getTokenType().equals(Tokenizer.DEFUN)) {
 				InDefun = true; // Setting flag so the interpreter knows every character must be in the defun
-				MethodCreator.setOpenParQty(1);
+				MethodCreator.setOpenParQty(1);//Adding 1 to the count of open parenthesis
 				
 			}
 			
@@ -48,19 +52,27 @@ public class main {
 				}
 				
 				else if(MethodCreator.getOpenParQty()  == 1) {//Its going to read the name of the method if there is only the first parenthesis
-					System.out.println("Nombre del metodo:" + token.getValue());
+					CreatedMethodName = "" + token.getValue();
+					
+					Method newMethod = new Method(CreatedMethodName);
+					
+					CreatedMethods.put("" + token.getValue(), newMethod);
+					
 				}
 				
 				else if(MethodCreator.getOpenParQty()  == 2 && MethodCreator.getCloseParQTty() == 0) { //This means the reader is in the parameters of the function
-					System.out.println("Parametro" + token.getValue());
+					CreatedMethods.get(CreatedMethodName).getParameters().add(token);
+					
 				}
 			
 				if(!MethodCreator.SameQtyOfParenthesis() && MethodCreator.getCloseParQTty() >= 1) {
-					System.out.println("Agregando: " + token.getValue());
+					CreatedMethods.get(CreatedMethodName).getCode().add(token);
 				}
 				
 				if(MethodCreator.SameQtyOfParenthesis()) {
-					System.out.println("Misma cantidad de parentesis");
+					CreatedMethods.get(CreatedMethodName).getCode().remove(0);// removing extra close par at the beginning
+					CreatedMethodName = ""; // Reseting the name in case another function is created
+					MethodCreator.ResetCounters();
 					InDefun = false;
 				}
 				
@@ -72,10 +84,9 @@ public class main {
 			}
 			
 			
-			
 			else if(token.getTokenType().equals(Tokenizer.CLOSE_PAR) && IsQuoted == false) {
 				ArrayList<Token> EvaluatedList = Stack.pop();
-				Stack.peek().add(Evaluator.evaluateExpression(EvaluatedList, Operator, Tokenizer));
+				Stack.peek().add(Evaluator.evaluateExpression(EvaluatedList, Operator, Tokenizer, CreatedMethods));
 				
 			} 
 			else if(token.getTokenType().equals(Tokenizer.QUOTE)) {

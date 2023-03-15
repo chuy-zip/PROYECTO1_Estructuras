@@ -23,6 +23,9 @@ public class MethodParser {
 	public void setOpenParQty(int openParQty) {
 		OpenParQty = openParQty;
 	}
-	
+	public void ResetCounters() {
+		CloseParQTty = 0;
+		OpenParQty = 0;
+	}
 	
 }

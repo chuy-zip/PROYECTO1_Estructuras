@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Stack;
 
 public class LISPEvaluator {
 	
-	public <T> Token evaluateExpression(ArrayList<Token> expression, LISPOperations Operator, Tokenizer Tokenizer ) {
+	public <T> Token evaluateExpression(ArrayList<Token> expression, LISPOperations Operator, Tokenizer Tokenizer, HashMap<String, Method> CreatedMethods ) {
 	    Stack<Token> stack = new Stack<>();
 	    for (Token token : expression) {
 	    	stack.push(token);
@@ -176,6 +178,14 @@ public class LISPEvaluator {
 			        	return NotTrue;
 			        }		        	
 		        }
+	        } else if ( CreatedMethods.get( "" + token.getValue()) != null ) {
+	        	
+	        	ArrayList<Token> FunctionExpresion = CreatedMethods.get( "" + token.getValue()).getCode();
+	        	
+	        	DefunEval defunEval = new DefunEval();
+	        	
+	        	return defunEval.Evaluate(FunctionExpresion);
+	        	
 	        }
 	    }
 		    
