@@ -16,6 +16,7 @@ public class MethodParser {
 		
 		return false;
 	}
+	
 	/**
 	 * Returns the quantity of close parentheses counted by this object.
 	 * @return the quantity of close parentheses counted by this object

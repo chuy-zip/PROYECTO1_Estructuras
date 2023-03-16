@@ -10,10 +10,9 @@ import java.util.Stack;
  */
 public class main {
 	
-    /**
+	/**
      * The entry point of the LISP interpreter.
-     *
-     * @param args The command-line arguments passed to the program.
+     *@param args The command-line arguments passed to the program.
      */
 	public static void main(String[] args) {
 		
