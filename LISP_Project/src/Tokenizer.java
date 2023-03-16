@@ -1,7 +1,13 @@
 import java.util.ArrayList;
 
+/**
+ * The Tokenizer class is responsible for converting a program string into an array of tokens.
+ */
 public class Tokenizer {
 	
+	/**
+	 * Constants for different types of tokens
+	 */
 	final String OPEN_PAR = "OPEN_PAR";
 	final String NUMBER = "NUMBER";
 	final String CLOSE_PAR = "CLOSE_PAR";
@@ -25,8 +31,13 @@ public class Tokenizer {
 	final String COND = "COND";
 	final String DEFUN = "DEFUN";
 	
-	//Variables that are considered atoms are also number and string
 	
+	/**
+	 * This method converts a program string into an array of tokens.
+	 * Variables that are considered atoms are also number and string
+	 * @param ProgramString A string representing the program to be tokenized
+	 * @return An array list of Token objects representing each token in the program string
+	 */
 	public ArrayList<Token> StringToTokens(String[] ProgramString) {
 		ArrayList<Token> TokenList = new ArrayList<>();
 		
@@ -153,6 +164,11 @@ public class Tokenizer {
 		
 	}
 	
+	/**
+	 * Checks whether the given string is a valid numeric value.
+	 * @param str the string to check
+	 * @return true if the string is numeric, false otherwise
+	 */
 	public boolean isNumeric(String str) { 
 		  try {  
 		    Double.parseDouble(str);  

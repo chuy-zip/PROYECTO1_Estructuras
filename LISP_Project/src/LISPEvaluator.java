@@ -3,8 +3,23 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Stack;
 
+/**
+ * This class implements an evaluator for a LISP-like language. It contains a method for evaluating
+ * an ArrayList of Tokens representing an expression, given an operator, a tokenizer, and a HashMap
+ * containing user-defined methods.
+ */
 public class LISPEvaluator {
 	
+	/**
+	 * This method evaluates an ArrayList of Tokens representing a LISP-like expression. 
+	 * It returns a Token with the result of the evaluation.
+	 * @param expression an ArrayList of Tokens representing the expression to evaluate
+	 * @param Operator a LISPOperations object containing the implementation of the operators
+	 * @param Tokenizer a Tokenizer object for tokenizing expressions
+	 * @param CreatedMethods a HashMap containing user-defined methods
+	 * @param <T> the type of the value contained in the Tokens
+	 * @return a Token with the result of the evaluation
+	 */
 	public <T> Token evaluateExpression(ArrayList<Token> expression, LISPOperations Operator, Tokenizer Tokenizer, HashMap<String, Method> CreatedMethods ) {
 	    Stack<Token> stack = new Stack<>();
 	    for (Token token : expression) {
