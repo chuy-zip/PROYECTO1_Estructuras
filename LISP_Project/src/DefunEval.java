@@ -3,8 +3,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Stack;
 
+/**
+ * DefunEval is a class that evaluates a list of tokens and returns a Token result.
+ */
 public class DefunEval {
 	
+	/**
+	 * This method evaluates a list of tokens and returns a Token result.
+	 * @param TokenList the list of tokens to be evaluated.
+	 * @return the result of evaluating the list of tokens.
+	 */
 	public Token Evaluate(ArrayList<Token> TokenList){
 		
 		Tokenizer Tokenizer = new Tokenizer();

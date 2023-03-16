@@ -5,7 +5,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Stack;
 
+/**
+ * The main class of the LISP interpreter.
+ */
 public class main {
+	
+    /**
+     * The entry point of the LISP interpreter.
+     *
+     * @param args The command-line arguments passed to the program.
+     */
 	public static void main(String[] args) {
 		
 		System.out.println("INTERPRETE LISP");
